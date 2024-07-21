@@ -8,11 +8,13 @@ class AIChatScreen extends StatefulWidget {
 }
 
 class _AIChatScreenState extends State<AIChatScreen> {
+  TextEditingController aitextcontroller = new TextEditingController();
+  String aitext =
+      "Hello there. I am Iono AI Research Assistant. Anything sparked your curiosity.";
   @override
   Widget build(BuildContext context) {
-    String aitext =
-        "Hello there. I am Iono AI Research Assistant. Anything sparked your curiosity.";
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Column(
         children: [
@@ -215,15 +217,25 @@ class _AIChatScreenState extends State<AIChatScreen> {
                             width: size.width * 0.75 * 0.7,
                             height: size.height * 0.17 * .7,
                             child: TextField(
+                              controller: aitextcontroller,
                               decoration: InputDecoration(
                                   hintStyle: TextStyle(color: Colors.white),
                                   hintText: "Ask me about anything"),
                             ),
                           ),
-                          CircleAvatar(
-                            backgroundColor: Colors.cyan,
-                            child: Icon(Icons.arrow_upward_outlined),
-                          )
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                if (aitextcontroller.text.isEmpty) {
+                                  aitext = "Please enter a question";
+                                } else {
+                                  aitext = aitextcontroller.text;
+                                }
+                              });
+                            },
+                            color: Colors.cyan,
+                            icon: Icon(Icons.arrow_upward_outlined),
+                          ),
                         ],
                       ))
                 ],

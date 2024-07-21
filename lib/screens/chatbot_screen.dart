@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class AIChatScreen extends StatefulWidget {
@@ -196,7 +197,26 @@ class _AIChatScreenState extends State<AIChatScreen> {
                                 blurRadius: 3,
                                 blurStyle: BlurStyle.normal),
                             growable: true)),
-                    child: Text("$aitext"),
+                    child: Wrap(
+                      children: [
+                        AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              "$aitext",
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
+                              speed: const Duration(milliseconds: 100),
+                            ),
+                          ],
+                          totalRepeatCount: 1,
+                          pause: const Duration(milliseconds: 500),
+                          displayFullTextOnTap: true,
+                          stopPauseOnTap: true,
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: size.height * 0.05,
